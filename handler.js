@@ -13,8 +13,10 @@ const geocodeW3W = params => axios.get(W3W_GEOCODE_URL, {
 
 const parseGoogleAddressComponents = (addressComponents) => {
   let location = UNKNOWN_LOCATION;
+  location = '';
   addressComponents.forEach((component) => {
     const addressTypes = component.types;
+
     addressTypes.forEach((type) => {
       if (type === 'sublocality_level_1') {
         location += `${component.long_name}, `;
