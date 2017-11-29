@@ -1,5 +1,7 @@
 # aws-lamba-whereis
 
+[![Build Status](https://travis-ci.org/tsamaya/aws-lambda-whereis.svg?branch=master)](https://travis-ci.org/tsamaya/aws-lambda-whereis)
+
 ## Quick start
 
 ### Prerequisites
