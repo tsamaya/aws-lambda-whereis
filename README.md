@@ -13,7 +13,7 @@
 ### AWS - Credentials
 [Watch the video on setting up credentials](https://www.youtube.com/watch?v=KngM5bfpttA)
 
-or look at serverles documentatoon about [credentials](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
+or look at serverless documentation about [credentials](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
 
 Adding a profile on the AWS config
 
@@ -35,7 +35,7 @@ create `environment.yml` file
 
     $ serverless env --attribute W3W_API_KEY --value <YOUR-W3W-API-KEY> --stage dev
 
-### Quick test
+### Running locally
 
     $ sls offline start
 
@@ -94,11 +94,11 @@ custom:
     - environment.yml
 ```
 
-create `environment.yml` file to store API keys
+create `environment.yml` file to store API keys:
 
-- `$ serverless env --attribute W3W_API_KEY --value $W3W_API_KEY --stage dev`
+    $ serverless env --attribute GOOGLE_API_KEY --value <YOUR-GOOGLE_API_KEY> --stage dev
 
-- `$ serverless env --attribute W3W_API_KEY --value $W3W_API_KEY --stage dev`
+    $ serverless env --attribute W3W_API_KEY --value <YOUR-W3W-API-KEY> --stage dev
 
 edit `serverless.yml` file, find
 

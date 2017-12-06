@@ -4,12 +4,40 @@ const axios = require('axios');
 const GOOGLE_GEOCODE_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 const W3W_GEOCODE_URL = 'https://api.what3words.com/v2/forward';
 const UNKNOWN_LOCATION = 'Unknown location';
+
+const MISSING_QUERY_PARAMETERS = 'Couldn\'t read query parameters';
+
 const googleGeocode = params => axios.get(GOOGLE_GEOCODE_URL, {
   params
 });
 const geocodeW3W = params => axios.get(W3W_GEOCODE_URL, {
   params
 });
+
+const badRequest = (message, callback) => {
+  callback(null, {
+    statusCode: 400,
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+      'Access-Control-Allow-Credentials': true // Required for cookies, authorization headers with HTTPS
+    },
+    body: {
+      error: 400,
+      message,
+    }
+  });
+};
+
+const success = (data, callback) => {
+  callback(null, {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+      'Access-Control-Allow-Credentials': true // Required for cookies, authorization headers with HTTPS
+    },
+    body: data
+  });
+};
 
 const parseGoogleAddressComponents = (addressComponents) => {
   let location = UNKNOWN_LOCATION;
@@ -35,16 +63,10 @@ const parseGoogleAddressComponents = (addressComponents) => {
   return location;
 };
 
-module.exports.whereIs = (event, context, callback) => {
+const whereIs = (event, context, callback) => {
   // check queryStringParameters
   if (!event.queryStringParameters || typeof event.queryStringParameters.lat === 'undefined' || typeof event.queryStringParameters.lng === 'undefined') {
-    callback(null, {
-      statusCode: 400,
-      body: {
-        error: 400,
-        message: 'Couldn\'t read query parameters',
-      }
-    });
+    badRequest(MISSING_QUERY_PARAMETERS, callback);
     return;
   }
 
@@ -66,27 +88,15 @@ module.exports.whereIs = (event, context, callback) => {
         result.formatted_address = first.formatted_address;
       }
     }
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify(result)
-    });
+    success(JSON.stringify(result), callback);
   }).catch((err) => {
-    callback(null, {
-      statusCode: 400,
-      body: JSON.stringify(err.response.data)
-    });
+    badRequest(JSON.stringify(err.response.data), callback);
   });
 };
 
-module.exports.whereIsWhat3words = (event, context, callback) => {
+const whereIsWhat3words = (event, context, callback) => {
   if (!event.queryStringParameters) {
-    callback(null, {
-      statusCode: 400,
-      body: {
-        error: 400,
-        message: 'Couldn\'t read query parameters',
-      }
-    });
+    badRequest(MISSING_QUERY_PARAMETERS, callback);
     return;
   }
   const params = event.queryStringParameters;
@@ -110,17 +120,14 @@ module.exports.whereIsWhat3words = (event, context, callback) => {
             result.formatted_address = first.formatted_address;
           }
         }
-        callback(null, {
-          statusCode: 200,
-          body: JSON.stringify(result)
-        });
+        success(JSON.stringify(result), callback);
       });
     }
   }).catch((err) => {
     // console.log(err.data);
-    callback(null, {
-      statusCode: 400,
-      body: JSON.stringify(err.response.data)
-    });
+    badRequest(JSON.stringify(err.response.data), callback);
   });
 };
+
+module.exports.whereIs = whereIs;
+module.exports.whereIsWhat3words = whereIsWhat3words;
