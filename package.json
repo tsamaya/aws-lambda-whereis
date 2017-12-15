@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-whereis",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "where is",
   "main": "handler.js",
   "dependencies": {
@@ -8,15 +8,32 @@
     "dotenv": "^4.0.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "codecov": "^3.0.0",
+    "dotenv-webpack": "^1.5.4",
     "eslint": "^4.12.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.4.2",
+    "jest": "^21.2.1",
     "serverless-env-generator": "^1.1.2",
-    "serverless-offline": "^3.16.0"
+    "serverless-offline": "^3.16.0",
+    "serverless-webpack": "^4.1.0",
+    "webpack": "^3.10.0"
   },
   "scripts": {
+    "start": "serverless offline start",
     "lint": "eslint .",
-    "test": "npm run lint"
+    "codecov": "codecov",
+    "coverage": "npm run test && npm run codecov",
+    "pretest": "npm run lint",
+    "test": "jest"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "keywords": [],
   "author": "",
