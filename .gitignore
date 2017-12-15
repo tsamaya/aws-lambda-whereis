@@ -1,12 +1,25 @@
 # package directories
-node_modules
-jspm_packages
+node_modules/
+jspm_packages/
 
 # Serverless directories
-.serverless
+.serverless/
 
 # environment files containing API keys
 environment.yml
 .env
+
+.eslintcache
+
+# Coverage directory
+coverage/
+
+# Logs
+logs
+*.log
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 tmp/
