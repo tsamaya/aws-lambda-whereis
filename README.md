@@ -1,6 +1,6 @@
 # aws-lamba-whereis
 
-[![Build Status](https://travis-ci.org/tsamaya/aws-lambda-whereis.svg?branch=master)](https://travis-ci.org/tsamaya/aws-lambda-whereis)
+[![Build Status](https://travis-ci.org/tsamaya/aws-lambda-whereis.svg?branch=master)](https://travis-ci.org/tsamaya/aws-lambda-whereis) [![codecov](https://codecov.io/gh/tsamaya/aws-lambda-whereis/branch/develop/graph/badge.svg)](https://codecov.io/gh/tsamaya/aws-lambda-whereis)
 
 :warning: work in progress with webpack / es6
 

@@ -5,7 +5,8 @@ module.exports = {
     ],
     rules: {
       'comma-dangle': 0,
-      'no-console': 0
+      'no-console': 0,
+      'prefer-promise-reject-errors': 0
     },
     env: {
       'node': true,

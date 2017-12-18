@@ -38,28 +38,31 @@ functions:
           request:
             parameters:
               querystrings:
-                lat: true
-                lng: true
-  whereIsOCD:
-    handler: src/handler.whereIsOCD
-    events:
-      - http:
-          path: whereisocd
-          method: get
-          cors: true
-          request:
-            parameters:
-              querystrings:
-                lat: true
-                lng: true
-  whereIsWhat3words:
-    handler: src/handler.whereIsWhat3words
-    events:
-      - http:
-          path: whereisw3w
-          method: get
-          cors: true
-          request:
-            parameters:
-              querystrings:
-                addr: true
+    #             lat: true
+    #             lng: true
+                lat: false
+                lng: false
+                w3w: false
+  # whereIsOCD:
+  #   handler: src/handler.whereIsOCD
+  #   events:
+  #     - http:
+  #         path: whereisocd
+  #         method: get
+  #         cors: true
+  #         request:
+  #           parameters:
+  #             querystrings:
+  #               lat: true
+  #               lng: true
+  # whereIsWhat3words:
+  #   handler: src/handler.whereIsWhat3words
+  #   events:
+  #     - http:
+  #         path: whereisw3w
+  #         method: get
+  #         cors: true
+  #         request:
+  #           parameters:
+  #             querystrings:
+  #               addr: true
