@@ -137,13 +137,30 @@ describe('Google Geocoder Library', () => {
       });
     });
 
+    test('zero', () => {
+      expect.assertions(1);
+      return googleReverseGeocode('ze', 'ro').then((data) => {
+        expect(data).toEqual({ location: UNKNOWN_LOCATION });
+      });
+    });
+
     test('Brooklyn', () => {
       expect.assertions(1);
       return googleReverseGeocode(40.714224, -73.961452).then((data) => {
-        console.log(data);
+        // console.log(data);
         expect(data).toEqual({
           location: 'Brooklyn, New York, United States',
           formatted_address: '277 Bedford Ave, Brooklyn, NY 11211, USA'
+        });
+      });
+    });
+
+    test('Tokyo', () => {
+      expect.assertions(1);
+      return googleReverseGeocode(35.6894875, 139.6917064).then((data) => {
+        // console.log(data);
+        expect(data).toEqual({
+          location: 'Tokyo, Japan'
         });
       });
     });
