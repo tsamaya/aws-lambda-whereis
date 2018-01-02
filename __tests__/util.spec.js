@@ -1,4 +1,4 @@
-import { isArray, isNumber } from '../src/util';
+import { isArray, isNumber, isUndefinedOrEmpty } from '../src/util';
 
 describe('Utility library', () => {
   describe('function isArray', () => {
@@ -128,6 +128,33 @@ describe('Utility library', () => {
       const input = 2.7e-5;
       const result = isNumber(input);
       expect(result).toBe(true);
+    });
+  });
+  describe('function isUndefinedOrEmpty', () => {
+    test('undefined', () => {
+      const input = undefined;
+      const result = isUndefinedOrEmpty(input);
+      expect(result).toBe(true);
+    });
+    test('empty', () => {
+      const input = '';
+      const result = isUndefinedOrEmpty(input);
+      expect(result).toBe(true);
+    });
+    test('a', () => {
+      const input = 'a';
+      const result = isUndefinedOrEmpty(input);
+      expect(result).toBe(false);
+    });
+    test('0', () => {
+      const input = '0';
+      const result = isUndefinedOrEmpty(input);
+      expect(result).toBe(false);
+    });
+    test('10', () => {
+      const input = '10';
+      const result = isUndefinedOrEmpty(input);
+      expect(result).toBe(false);
     });
   });
 });
