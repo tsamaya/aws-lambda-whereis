@@ -19,7 +19,6 @@ describe('what3words Geocoder Library', () => {
   test('index.home.raft', () => {
     expect.assertions(1);
     return what3wordsGeocode('index.home.raft').then((data) => {
-      console.log(data);
       expect(data).toEqual({
         location: 'London, England, United Kingdom',
         words: 'index.home.raft',

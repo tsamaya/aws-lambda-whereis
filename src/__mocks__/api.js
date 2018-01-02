@@ -22,7 +22,22 @@ const geocodeGoogle = (params) => {
     return new Promise((resolve /* , reject */) => {
       resolve({ data: { results: [], status: 'ZERO_RESULTS' } });
     });
-  } else if (params.addr === 'index.home.raft') {
+  }
+  return new Promise((resolve, reject) => {
+    reject({
+      response: {
+        data: {
+          error_message: 'Invalid request{...}',
+          results: [],
+          status: 'INVALID_REQUEST'
+        }
+      }
+    });
+  });
+};
+
+const geocodeW3W = (params) => {
+  if (params.addr === 'index.home.raft') {
     return new Promise((resolve /* , reject */) => {
       resolve({ data: indexHomeRaftStub });
     });
@@ -41,5 +56,5 @@ const geocodeGoogle = (params) => {
 };
 
 export {
-  geocodeGoogle // eslint-disable-line
+  geocodeGoogle, geocodeW3W // eslint-disable-line
 };

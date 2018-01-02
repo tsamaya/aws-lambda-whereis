@@ -1,6 +1,6 @@
 import { UNKNOWN_LOCATION } from './const';
 
-import { geocodeGoogle } from './api';
+import { geocodeGoogle, geocodeW3W } from './api';
 import { isArray } from './util';
 
 require('dotenv').config();
@@ -89,21 +89,21 @@ const what3wordsGeocode = (addr) => {
   params.addr = addr;
   params.key = process.env.W3W_API_KEY;
   const pResult = new Promise((resolve, reject) => {
-    geocodeGoogle(params).then((response) => {
+    geocodeW3W(params).then((response) => {
       const result = {
         location: UNKNOWN_LOCATION
       };
       // console.log('200 response');
       if (response.data && response.data.geometry) {
         result.words = response.data.words;
-        const p = googleReverseGeocode(response.data.geometry.lat, response.data.geometry.lng);
-        p.then((gResponse) => {
-          result.location = gResponse.location;
-          result.formatted_address = gResponse.formatted_address;
-          resolve(result);
-        }).catch((gErr) => {
-          reject(gErr);
-        });
+        googleReverseGeocode(response.data.geometry.lat, response.data.geometry.lng)
+          .then((gResponse) => {
+            result.location = gResponse.location;
+            result.formatted_address = gResponse.formatted_address;
+            resolve(result);
+          }).catch((gErr) => {
+            reject(gErr);
+          });
       } else {
         console.error('WTF');
         reject(result);
