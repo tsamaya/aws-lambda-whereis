@@ -50,6 +50,7 @@ const success = (data, callback) => {
 const operationGoogle = (lat, lng, callback) => {
   if (!isNumber(lat) || !isNumber(lng)) {
     badRequest(INVALID_COORDS_PARAMETERS, callback);
+    return;
   }
   const p = googleReverseGeocode(lat, lng);
   p.then((response) => {
