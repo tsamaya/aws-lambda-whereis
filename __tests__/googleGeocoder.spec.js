@@ -118,26 +118,23 @@ describe('Google Geocoder Library', () => {
   });
 
   describe('googleReverseGeocode', () => {
-    // beforeAll(() => {
-    // });
+    test('Invalid coordinates', () => {
+      expect.assertions(1);
+      return googleReverseGeocode('a', 'b').catch((data) => {
+        expect(data).toEqual('Invalid coordinates');
+      });
+    });
 
     test('INVALID_REQUEST', () => {
       expect.assertions(1);
-      return googleReverseGeocode('a', 'b').catch((data) => {
-        // expect(data).toEqual({
-        //   location: UNKNOWN_LOCATION
-        // });
-        expect(data).toEqual({
-          error_message: 'Invalid request{...}',
-          results: [],
-          status: 'INVALID_REQUEST'
-        });
+      return googleReverseGeocode(9000, 9000).catch((data) => {
+        expect(data).toEqual({ error_message: 'Invalid request{...}', results: [], status: 'INVALID_REQUEST' });
       });
     });
 
     test('zero', () => {
       expect.assertions(1);
-      return googleReverseGeocode('ze', 'ro').then((data) => {
+      return googleReverseGeocode(90, 180).then((data) => {
         expect(data).toEqual({ location: UNKNOWN_LOCATION });
       });
     });

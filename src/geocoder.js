@@ -1,7 +1,7 @@
-import { UNKNOWN_LOCATION } from './const';
+import { UNKNOWN_LOCATION, INVALID_COORDS_PARAMETERS } from './const';
 
 import { geocodeGoogle, geocodeW3W } from './api';
-import { isArray } from './util';
+import { isArray, isNumber } from './util';
 
 require('dotenv').config();
 
@@ -52,11 +52,16 @@ const parseGoogleAddressComponents = (addressComponents) => {
  */
 const googleReverseGeocode = (lat, lng) => {
   console.log('reverse geocode with google', lat, lng);
-  const params = {};
-  params.latlng = `${lat},${lng}`;
-  params.key = process.env.GOOGLE_API_KEY;
 
-  const pResult = new Promise((resolve, reject) => {
+  const p = new Promise((resolve, reject) => {
+    if (!isNumber(lat) || !isNumber(lng)) {
+      reject(INVALID_COORDS_PARAMETERS);
+      return;
+    }
+
+    const params = {};
+    params.latlng = `${lat},${lng}`;
+    params.key = process.env.GOOGLE_API_KEY;
     geocodeGoogle(params).then((response) => {
       const result = {
         location: UNKNOWN_LOCATION
@@ -75,7 +80,7 @@ const googleReverseGeocode = (lat, lng) => {
       reject(err.response.data);
     });
   });
-  return pResult;
+  return p;
 };
 
 /**
@@ -85,15 +90,15 @@ const googleReverseGeocode = (lat, lng) => {
  */
 const what3wordsGeocode = (addr) => {
   console.log('geocode with what3words', addr);
-  const params = {};
-  params.addr = addr;
-  params.key = process.env.W3W_API_KEY;
-  const pResult = new Promise((resolve, reject) => {
+  const p = new Promise((resolve, reject) => {
+    const params = {};
+    params.addr = addr;
+    params.key = process.env.W3W_API_KEY;
     geocodeW3W(params).then((response) => {
       const result = {
         location: UNKNOWN_LOCATION
       };
-      // console.log('200 response');
+      // console.log('200 response', response.data);
       if (response.data && response.data.geometry) {
         result.words = response.data.words;
         googleReverseGeocode(response.data.geometry.lat, response.data.geometry.lng)
@@ -105,14 +110,13 @@ const what3wordsGeocode = (addr) => {
             reject(gErr);
           });
       } else {
-        console.error('WTF');
-        reject(result);
+        resolve(result);
       }
     }).catch((err) => {
       reject(err.response.data);
     });
   });
-  return pResult;
+  return p;
 };
 
 export {

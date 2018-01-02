@@ -3,6 +3,8 @@ import homeStub from '../../__tests__/stubs/IndexHomeRaft.json';
 import tokyoStub from '../../__tests__/stubs/tokyo.json';
 
 import indexHomeRaftStub from '../../__tests__/stubs/w3w.index.home.raft.json';
+import fakeStub from '../../__tests__/stubs/w3w.fakeForGoogleRejection.json';
+import w3wErrorStub from '../../__tests__/stubs/w3w.error.json';
 
 const geocodeGoogle = (params) => {
   // console.log('in geocodeGoogle mock function', params);
@@ -18,7 +20,7 @@ const geocodeGoogle = (params) => {
     return new Promise((resolve /* , reject */) => {
       resolve({ data: tokyoStub });
     });
-  } else if (params.latlng === 'ze,ro') {
+  } else if (params.latlng === '90,180') {
     return new Promise((resolve /* , reject */) => {
       resolve({ data: { results: [], status: 'ZERO_RESULTS' } });
     });
@@ -40,6 +42,14 @@ const geocodeW3W = (params) => {
   if (params.addr === 'index.home.raft') {
     return new Promise((resolve /* , reject */) => {
       resolve({ data: indexHomeRaftStub });
+    });
+  } else if (params.addr === 'toto.toto.toto') {
+    return new Promise((resolve /* , reject */) => {
+      resolve({ data: w3wErrorStub });
+    });
+  } else if (params.addr === 'fake.google.reject.test') {
+    return new Promise((resolve /* , reject */) => {
+      resolve({ data: fakeStub });
     });
   }
   return new Promise((resolve, reject) => {
