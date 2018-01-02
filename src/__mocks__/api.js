@@ -2,6 +2,8 @@ import brooklynStub from '../../__tests__/stubs/brooklyn.json';
 import homeStub from '../../__tests__/stubs/IndexHomeRaft.json';
 import tokyoStub from '../../__tests__/stubs/tokyo.json';
 
+import indexHomeRaftStub from '../../__tests__/stubs/w3w.index.home.raft.json';
+
 const geocodeGoogle = (params) => {
   // console.log('in geocodeGoogle mock function', params);
   if (params.latlng === '40.714224,-73.961452') {
@@ -19,6 +21,10 @@ const geocodeGoogle = (params) => {
   } else if (params.latlng === 'ze,ro') {
     return new Promise((resolve /* , reject */) => {
       resolve({ data: { results: [], status: 'ZERO_RESULTS' } });
+    });
+  } else if (params.addr === 'index.home.raft') {
+    return new Promise((resolve /* , reject */) => {
+      resolve({ data: indexHomeRaftStub });
     });
   }
   return new Promise((resolve, reject) => {
