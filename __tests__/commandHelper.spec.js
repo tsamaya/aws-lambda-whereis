@@ -22,6 +22,20 @@ describe('QueryString parameters', () => {
   test('lat undefined,lng 0', () => {
     expect(parseQueryString({ lat: undefined, lng: 0 })).toEqual(ERROR_MISSING_QUERY_PARAMETERS);
   });
+  test('lat NaN,lng NaN', () => {
+    expect(parseQueryString({ lat: NaN, lng: NaN })).toEqual({
+      operation: 'google',
+      lat: NaN,
+      lng: NaN
+    });
+  });
+  test('lat "NaN",lng "NaN"', () => {
+    expect(parseQueryString({ lat: 'NaN', lng: 'NaN' })).toEqual({
+      operation: 'google',
+      lat: NaN,
+      lng: NaN
+    });
+  });
   test('lat 0,lng undefined', () => {
     expect(parseQueryString({ lat: 0, lng: undefined })).toEqual(ERROR_MISSING_QUERY_PARAMETERS);
   });
