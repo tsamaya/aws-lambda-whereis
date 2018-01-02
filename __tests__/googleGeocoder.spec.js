@@ -1,8 +1,6 @@
-import {
-  parseGoogleAddressComponents,
-  googleReverseGeocode,
-  UNKNOWN_LOCATION
-} from '../src/geocoder';
+import { UNKNOWN_LOCATION } from '../src/const';
+
+import { parseGoogleAddressComponents, googleReverseGeocode } from '../src/geocoder';
 
 jest.mock('../src/api');
 
