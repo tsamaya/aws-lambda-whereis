@@ -1,12 +1,7 @@
-import {
-  geocodeGoogle
-} from './api';
+import { UNKNOWN_LOCATION } from './const';
 
-import {
-  isArray
-} from './util';
-
-const UNKNOWN_LOCATION = 'Unknown location';
+import { geocodeGoogle } from './api';
+import { isArray } from './util';
 
 require('dotenv').config();
 
@@ -85,6 +80,5 @@ const googleReverseGeocode = (lat, lng) => {
 
 export {
   googleReverseGeocode,
-  parseGoogleAddressComponents,
-  UNKNOWN_LOCATION
+  parseGoogleAddressComponents
 }; // eslint-disable-line
