@@ -78,7 +78,45 @@ const googleReverseGeocode = (lat, lng) => {
   return pResult;
 };
 
+/**
+ * [what3wordsGeocode description]
+ * @param  {String} addr [description]
+ * @return {Promise}      [description]
+ */
+const what3wordsGeocode = (addr) => {
+  console.log('geocode with what3words', addr);
+  const params = {};
+  params.addr = addr;
+  params.key = process.env.W3W_API_KEY;
+  const pResult = new Promise((resolve, reject) => {
+    geocodeGoogle(params).then((response) => {
+      const result = {
+        location: UNKNOWN_LOCATION
+      };
+      // console.log('200 response');
+      if (response.data && response.data.geometry) {
+        result.words = response.data.words;
+        const p = googleReverseGeocode(response.data.geometry.lat, response.data.geometry.lng);
+        p.then((gResponse) => {
+          result.location = gResponse.location;
+          result.formatted_address = gResponse.formatted_address;
+          resolve(result);
+        }).catch((gErr) => {
+          reject(gErr);
+        });
+      } else {
+        console.error('WTF');
+        reject(result);
+      }
+    }).catch((err) => {
+      reject(err.response.data);
+    });
+  });
+  return pResult;
+};
+
 export {
   googleReverseGeocode,
-  parseGoogleAddressComponents
+  parseGoogleAddressComponents,
+  what3wordsGeocode
 }; // eslint-disable-line

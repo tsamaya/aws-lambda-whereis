@@ -1,7 +1,7 @@
 import { INTERNAL_CONFIG_ERROR, INVALID_COORDS_PARAMETERS } from './const';
 
 import { isNumber } from './util';
-import { googleReverseGeocode } from './geocoder';
+import { googleReverseGeocode, what3wordsGeocode } from './geocoder';
 import checkEnv from './environment';
 import parseQueryString from './commandHelper';
 
@@ -58,6 +58,21 @@ const operationGoogle = (lat, lng, callback) => {
     badRequest(err, callback);
   });
 };
+
+/**
+ * [operationWhat3words description]
+ * @param  {String}   addr     3 word address
+ * @param  {Function} callback [description]
+ */
+const operationWhat3words = (addr, callback) => {
+  const p = what3wordsGeocode(addr);
+  p.then((response) => {
+    success(response, callback);
+  }).catch((err) => {
+    badRequest(err, callback);
+  });
+};
+
 /**
  * function handler
  * @param  {Object}   event    [description]
@@ -77,6 +92,8 @@ const handler = (event, context, callback) => {
   }
   if (command.operation === 'google') {
     operationGoogle(command.lat, command.lng, callback);
+  } else {
+    operationWhat3words(command.addr, callback);
   }
 };
 
