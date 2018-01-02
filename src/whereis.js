@@ -1,14 +1,9 @@
-import {
-  isNumber
-} from './util';
+import { INTERNAL_CONFIG_ERROR, INVALID_COORDS_PARAMETERS } from './const';
 
-import checkEnv from './environment';
-import checkQueryString from './query';
-
+import { isNumber } from './util';
 import { googleReverseGeocode } from './geocoder';
-
-const INTERNAL_CONFIG_ERROR = 'Configuration error';
-const INVALID_COORDS_PARAMETERS = 'Invalid coordinates';
+import checkEnv from './environment';
+import parseQueryString from './commandHelper';
 
 /**
  * return a bad request (HTTP 400) response withe the given mmessage
@@ -75,7 +70,7 @@ const handler = (event, context, callback) => {
     return;
   }
   // check queryStringParameters
-  const command = checkQueryString(event.queryStringParameters);
+  const command = parseQueryString(event.queryStringParameters);
   if (command.error) {
     badRequest(command.error, callback);
     return;
