@@ -10,7 +10,7 @@ import { isUndefinedOrEmpty } from './util';
  */
 const parseQueryString = (query) => {
   const command = {};
-  if (typeof query === 'undefined') {
+  if (typeof query === 'undefined' || query === null) {
     command.error = MISSING_QUERY_PARAMETERS;
   } else if ((isUndefinedOrEmpty(query.lat) || isUndefinedOrEmpty(query.lng))
             && isUndefinedOrEmpty(query.addr)) {
