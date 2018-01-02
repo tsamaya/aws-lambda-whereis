@@ -34,6 +34,9 @@ describe('QueryString parameters', () => {
   test('lat empty string,lng 0', () => {
     expect(parseQueryString({ lat: '', lng: 0 })).toEqual(ERROR_MISSING_QUERY_PARAMETERS);
   });
+  test('addr empty string', () => {
+    expect(parseQueryString({ addr: '' })).toEqual(ERROR_MISSING_QUERY_PARAMETERS);
+  });
   test('lat 0,lng 0', () => {
     expect(parseQueryString({ lat: 0, lng: 0 })).toEqual({
       operation: 'google',
@@ -95,6 +98,12 @@ describe('QueryString parameters', () => {
       operation: 'google',
       lat: -2.7e-5,
       lng: -2.7e-5
+    });
+  });
+  test('addr plan.clips.above', () => {
+    expect(parseQueryString({ addr: 'plan.clips.above' })).toEqual({
+      operation: 'w3w',
+      addr: 'plan.clips.above'
     });
   });
 });
