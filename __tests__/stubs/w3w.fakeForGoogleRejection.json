@@ -1,0 +1,31 @@
+{
+	"crs": {
+		"type": "link",
+		"properties": {
+			"href": "http:\/\/spatialreference.org\/ref\/epsg\/4326\/ogcwkt\/",
+			"type": "ogcwkt"
+		}
+	},
+	"words": "index.home.raft",
+	"bounds": {
+		"southwest": {
+			"lng": -0.203607,
+			"lat": 51.521238
+		},
+		"northeast": {
+			"lng": -0.203564,
+			"lat": 51.521265
+		}
+	},
+	"geometry": {
+		"lng": "a",
+		"lat": "b"
+	},
+	"language": "en",
+	"map": "http:\/\/w3w.co\/index.home.raft",
+	"status": {
+		"status": 200,
+		"reason": "OK"
+	},
+	"thanks": "Thanks from all of us at index.home.raft for using a what3words API"
+}

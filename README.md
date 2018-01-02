@@ -51,6 +51,10 @@ create `.env` file
 
     $ sls offline start
 
+    or
+
+    $ npm start
+
 #### sunny tests
 
   $ curl "http://localhost:3000/whereis?lat=40.714224&lng=-73.961452"
@@ -64,6 +68,8 @@ create `.env` file
     $ curl "http://localhost:3000/whereis?lat=40.714224"
 
     $ curl "http://localhost:3000/whereis?lat=aa&lng=bb"
+
+    $ curl "http://localhost:3000/whereis?addr=aa.bb.cc"
 
 
 ### deploy

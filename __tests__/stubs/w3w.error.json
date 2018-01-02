@@ -1,0 +1,9 @@
+{
+	"status": {
+		"status": 200,
+		"reason": "OK",
+		"code": 103,
+		"message": "The 'lang' parameter is invalid or missing a language code"
+	},
+	"thanks": "Thanks from all of us at index.home.raft for using a what3words API"
+}

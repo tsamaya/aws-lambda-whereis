@@ -1,4 +1,4 @@
-// import { UNKNOWN_LOCATION } from '../src/const';
+import { UNKNOWN_LOCATION } from '../src/const';
 
 import { what3wordsGeocode } from '../src/geocoder';
 
@@ -14,6 +14,19 @@ describe('what3words Geocoder Library', () => {
         results: [],
         status: 'INVALID_REQUEST'
       });
+    });
+  });
+  test('UNKNOWN_LOCATION', () => {
+    expect.assertions(1);
+    return what3wordsGeocode('toto.toto.toto').then((data) => {
+      // TODO :
+      expect(data).toEqual({ location: UNKNOWN_LOCATION });
+    });
+  });
+  test('fake.google.reject.test', () => {
+    expect.assertions(1);
+    return what3wordsGeocode('fake.google.reject.test').catch((data) => {
+      expect(data).toBeTruthy();
     });
   });
   test('index.home.raft', () => {
