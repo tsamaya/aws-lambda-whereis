@@ -3,8 +3,6 @@ import { UNKNOWN_LOCATION, INVALID_COORDS_PARAMETERS } from './const';
 import { geocodeGoogle, geocodeW3W } from './api';
 import { isArray, isNumber } from './util';
 
-require('dotenv').config();
-
 /**
  * parse Google Address Components using only
  * sublocality_level_1, postal_town, administrative_area_level_1 and country
