@@ -74,8 +74,11 @@ create `.env` file
 
 ### deploy
 
-    $ sls --aws-profile <namedProfile> deploy
+    $ sls --aws-profile <namedProfile> --stage <stage> deploy
 
+### display logs
+
+    $ sls --aws-profile <namedProfile> --stage <stage> logs -f whereIs -t
 
 ### Unit tests and coverage
 
@@ -83,6 +86,11 @@ create `.env` file
 
     $ npm run coverage
 
+
+## Revision history
+
+  1.1.0   TBD         ES6 and webpack rework, keep one function
+  1.0.0   06/12/2017  Creation with 2 functions
 
 ## Resources
 
