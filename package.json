@@ -4,8 +4,7 @@
   "description": "where is",
   "main": "handler.js",
   "dependencies": {
-    "axios": "^0.17.1",
-    "dotenv": "^4.0.0"
+    "axios": "^0.17.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -18,9 +17,10 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jest": "^21.4.2",
     "jest": "^21.2.1",
+    "serverless": "^1.25.0",
     "serverless-env-generator": "^1.1.2",
     "serverless-offline": "^3.16.0",
-    "serverless-webpack": "^4.1.0",
+    "serverless-webpack": "^4.2.0",
     "webpack": "^3.10.0"
   },
   "scripts": {
