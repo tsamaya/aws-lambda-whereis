@@ -1,27 +1,27 @@
-import { INTERNAL_CONFIG_ERROR, INVALID_COORDS_PARAMETERS } from './const';
+import { INVALID_COORDS_PARAMETERS } from './const';
 
 import { isNumber } from './util';
 import { googleReverseGeocode, what3wordsGeocode } from './geocoder';
-import checkEnv from './environment';
+
 import parseQueryString from './commandHelper';
 
 /**
  * return a bad request (HTTP 400) response withe the given mmessage
- * @param  {String}   message  error message
+ * @param  {Object}   data  error object
  * @param  {Function} callback [description]
  */
-const badRequest = (message, callback) => {
-  console.warn('bad request:', message);
+const badRequest = (data, callback) => {
+  console.warn('bad request:', data);
   callback(null, {
     statusCode: 400,
     headers: {
       'Access-Control-Allow-Origin': '*', // Required for CORS support to work
       'Access-Control-Allow-Credentials': true // Required for cookies, authorization headers with HTTPS
     },
-    body: {
+    body: JSON.stringify({
       error: 400,
-      message: JSON.stringify(message),
-    }
+      message: data,
+    })
   });
 };
 
@@ -81,10 +81,11 @@ const operationWhat3words = (addr, callback) => {
  * @param  {Function} callback [description]
  */
 const handler = (event, context, callback) => {
-  if (checkEnv(process.env).length > 0) {
-    badRequest(INTERNAL_CONFIG_ERROR, callback);
-    return;
-  }
+  // checkEnv unused as webpack and dotenv hardcode values in bundle file
+  // if (checkEnv(process.env).length > 0) {
+  //   badRequest(INTERNAL_CONFIG_ERROR, callback);
+  //   return;
+  // }
   // check queryStringParameters
   const command = parseQueryString(event.queryStringParameters);
   if (command.error) {
