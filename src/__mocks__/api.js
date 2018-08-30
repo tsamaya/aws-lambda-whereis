@@ -65,6 +65,4 @@ const geocodeW3W = (params) => {
   });
 };
 
-export {
-  geocodeGoogle, geocodeW3W // eslint-disable-line
-};
+export { geocodeGoogle, geocodeW3W };

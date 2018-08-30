@@ -1,6 +1,4 @@
-import {
-  geocodeGoogle
-} from '../src/api';
+import { geocodeGoogle } from '../src/api';
 
 import brooklynStub from './stubs/brooklyn.json';
 import homeStub from './stubs/IndexHomeRaft.json';
