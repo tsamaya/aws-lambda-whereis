@@ -17,7 +17,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jest": "^21.4.2",
     "jest": "^21.2.1",
-    "serverless": "^1.25.0",
+    "serverless": "^1.83.3",
     "serverless-env-generator": "^1.1.2",
     "serverless-offline": "^3.16.0",
     "serverless-webpack": "^4.2.0",
